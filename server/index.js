@@ -5,8 +5,14 @@ const express = require ("express");
 
 const app = express();
 
-//app.get("/getStudents")
+const db = require("./db");
 
+//app.get("/getStudents")
+app.use(express.json());
+
+app.get("/getMenu",(req,res)=>{
+    res.send("Hello");
+})
 
 
 const port = process.env.PORT || 3001;
