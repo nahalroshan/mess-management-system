@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Navbar() {
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState('dashboard');
 
   const handleButtonClick = (button) => {
     setSelected(button);
@@ -14,14 +14,14 @@ export default function Navbar() {
         ? "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(232,9,212,1) 0%, rgba(148,0,215,1) 100%)"
         : "",
       color: isSelected ? "white" : "",
-      width: isSelected ? "160px" : "",
+      width: isSelected ? "180px" : "",
       padding: isSelected ? "6px 20px" : "6px 20px",
       borderRadius: isSelected ? " 0 32px 32px 0" : "",
     };
   };
 
   return (
-    <div className="fixed top-0 left-0 h-screen space-y-4 w-52 m-0 flex flex-col bg-white text-dark-gray">
+    <div className="fixed top-0 left-0 h-screen space-y-4 w-56 m-0 flex text-lg flex-col bg-white text-dark-gray">
       <button
         className={'flex flex-row gap-2 font-semibold  text-dark-gray mt-20'}
         style={getButtonStyle("dashboard")}
@@ -64,12 +64,12 @@ export default function Navbar() {
             size = '20px'>
           </box-icon>{" "} Menu 
       </button>
-      <button 
+      {/* <button 
         className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
         style={getButtonStyle("payment")}
         onClick={() => handleButtonClick("payment")}> 
           Payment 
-      </button>
+      </button> */}
       <button 
         className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
         style={getButtonStyle("feedback")}

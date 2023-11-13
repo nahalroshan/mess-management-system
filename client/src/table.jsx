@@ -40,7 +40,7 @@ export default function Table() {
   }, [data]);
 
   return (
-    <div className='bg-white w-2/3 h-80 overflow-y-scroll'>
+    <div className='bg-white w-4/5 h-72 overflow-y-scroll ml-10'>
       <table border="1" style={{ tableLayout: 'fixed', width: '100%' }}>
         <thead>
           <tr>

@@ -1,8 +1,8 @@
 export default function Search() {
     return (
-      <div className="flex flex-row space-x-10 items-center">
+      <div className="flex flex-row space-x-10 items-center ml-10">
         <div className="font-semibold text-lg">Admissions</div>
-        <div className="w-80 h-10 shadow-md shadow-dark-gray flex items-center flex-row gap-4 rounded-3xl bg-white">
+        <div className="w-5/12 h-10 shadow-md shadow-dark-gray flex items-center flex-row gap-4 rounded-3xl bg-white">
           <div className="ml-4 mt-1">
             <box-icon name='search-alt-2'></box-icon>
           </div>

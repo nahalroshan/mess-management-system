@@ -12,7 +12,7 @@ export default function App() {
       </div>
       <div className="flex flex-col space-y-6 sm:space-y-10 w-full">
         <div className="flex flex-row mt-6 justify-between">
-          <p className="text-2xl font-medium">Dashboard</p>
+          <p className="text-3xl font-medium ml-10">Dashboard</p>
           <div className="flex flex-row space-x-4 items-center">
             <div className="rounded-full w-10 h-10 flex items-center justify-center bg-white"><box-icon name='envelope' color='#CD6496'></box-icon></div>
             <div className="space-x-4 rounded-l-2xl bg-white w-56 h-16 flex flex-row items-center shadow-lg shadow-dark-gray">
