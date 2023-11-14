@@ -10,21 +10,6 @@ app.use(express.json());
 
 // Use cors middleware
 app.use(cors());
-
-// Endpoint to get user data
-app.get("/user", async (req, res) => {
-    try {
-        // Example query to retrieve user data
-        const result = await db.query('SELECT * FROM users');
-
-        // Assuming result.rows contains the user data
-        res.json(result.rows);
-    } catch (error) {
-        console.error("Error fetching user data:", error);
-        res.status(500).send("Internal Server Error");
-    }
-});
-
 app.get("/table", async (req, res) => {
     try {
         // Example query to retrieve user data
@@ -37,6 +22,22 @@ app.get("/table", async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+// Endpoint to get user data
+app.get("/:ask", async (req, res) => {
+    var data_ask = req.params.ask;
+    try {
+        // Example query to retrieve user data
+        const result = await db.query(`SELECT * FROM ${data_ask}`);
+
+        // Assuming result.rows contains the user data
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
