@@ -9,7 +9,7 @@ const UserList = () => {
     // Fetch table data when the component mounts
     const fetchTables = async () => {
       try {
-        const response = await fetch('http://localhost:3007/table');
+        const response = await fetch('https://mess-server-new.onrender.com/table');
         const data = await response.json();
         setTables(data);
       } catch (error) {
@@ -25,7 +25,7 @@ const UserList = () => {
     const fetchData = async () => {
       if (selectedTable) {
         try {
-          const response = await fetch(`http://localhost:3007/${selectedTable}`);
+          const response = await fetch(`https://mess-server-new.onrender.com/${selectedTable}`);
           const data = await response.json();
           setTableData(data);
         } catch (error) {
