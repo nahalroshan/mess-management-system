@@ -30,22 +30,24 @@ export default function Login(props) {
     };
 
     return (
-        <div className="flex flex-col w-96 border-2 border-black space-y-8">
-                <div className="text-3xl font-medium ml-6 mt-8"> Login</div>
-                <form onSubmit={handleSubmit} >
-                    <div className="flex flex-col  ml-6">
-                        <label className = 'text-lg' htmlFor = 'email'>Email</label>
-                        <input className="border-2 border-black w-3/4" value = {email} onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email"></input>
+        <div className="flex bg-gray-300 h-screen w-full">
+            <div className="flex flex-col shadow-xl w-96 bg-white h-[480px] border-2 border-white shadow mx-auto my-8 space-y-8 rounded-md mt-32">
+                    <div className="text-2xl ml-8 mt-8 "> SIGN UP</div>
+                    <form onSubmit={handleSubmit} >
+                        <div className="flex flex-col  ml-8 ">
+                            <label className = 'text-lg mb-2 ml-1' htmlFor = 'email'>Email</label>
+                            <input className="rounded-md  border-2 w-3/4 h-9 w-10/12" value = {email} onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email"></input>
+                        </div>
+                        <div className="flex flex-col  ml-8">
+                            <label className = 'text-lg mb-2 mt-2 ml-1' htmlFor = 'password'>Password</label>
+                            <input className="border-2  w-3/4 rounded-md h-9 w-10/12" value = {pass} onChange={(e) => setPass(e.target.value)}type="password" id="password" name="password"></input>
+                        </div>
+                        <button className="border-2  mt-6 ml-14 w-64 p-2 rounded-md bg-pink-500 text-white hover:bg-pink-700" type="submit">SIGN UP</button>
+                    </form>
+                    <div>
+                        <button className="text-center mb-8 text-md ml-12"> Don't have an account? <span className="font-medium underline decoration-solid"><Link to = "/signup">Register here</Link></span></button>           
                     </div>
-                    <div className="flex flex-col  ml-6">
-                        <label className = 'text-lg' htmlFor = 'password'>Password</label>
-                        <input className="border-2 border-black w-3/4" value = {pass} onChange={(e) => setPass(e.target.value)}type="password" id="password" name="password"></input>
-                    </div>
-                    <button className = 'border-2 border-black mt-6 ml-7 w-64' type="submit">Login</button>
-                </form>
-                <div>
-                    <button className="text-center mb-8 text-md"> Don't have an account? <span className="font-medium underline decoration-solid"><Link to = "/signup">Register here</Link></span></button>           
-                </div>
-        </div>         
+            </div>
+        </div>       
     )
 }
