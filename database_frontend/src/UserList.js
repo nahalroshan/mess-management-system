@@ -1,60 +1,33 @@
-// UserList.js
 import React, { useState, useEffect } from 'react';
 
 const UserList = () => {
-  const [tableNames, setTableNames] = useState([]);
-  const [selectedTable, setSelectedTable] = useState('');
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const fetchTableNames = async () => {
+    const fetchData = async () => {
       try {
-        // Fetch the list of table names from your API
-        const response = await fetch('YOUR_TABLE_NAMES_API_URL');
+        const response = await fetch('http://localhost:3007/user', {
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any other headers if needed
+          },
+        });
         const data = await response.json();
-        setTableNames(data);
+        setUsers(data);
       } catch (error) {
-        console.error('Error fetching table names:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchTableNames();
+    fetchData();
   }, []);
-
-  const fetchData = async () => {
-    try {
-      // Fetch data based on the selected table
-      const response = await fetch(`YOUR_API_BASE_URL/${selectedTable}`);
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  useEffect(() => {
-    if (selectedTable) {
-      fetchData();
-    }
-  }, [selectedTable]);
 
   return (
     <div>
       <h1>User List</h1>
-      <label>
-        Select a table:
-        <select value={selectedTable} onChange={(e) => setSelectedTable(e.target.value)}>
-          <option value="">-- Select a table --</option>
-          {tableNames.map((tableName) => (
-            <option key={tableName} value={tableName}>
-              {tableName}
-            </option>
-          ))}
-        </select>
-      </label>
       <ul>
-        {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
+        {users.map(user => (
+          <li key={user.id}>{`${user.name} (ID: ${user.id})`}</li>
         ))}
       </ul>
     </div>

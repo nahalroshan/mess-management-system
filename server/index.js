@@ -1,11 +1,15 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors"); // Import the cors middleware
 const app = express();
 
 const db = require("./db/db");
 
 app.use(express.json());
+
+// Use cors middleware
+app.use(cors());
 
 // Endpoint to get user data
 app.get("/user", async (req, res) => {
@@ -32,7 +36,8 @@ app.get("/table", async (req, res) => {
         console.error("Error fetching user data:", error);
         res.status(500).send("Internal Server Error");
     }
-})
+});
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
