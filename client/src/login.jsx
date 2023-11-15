@@ -36,11 +36,11 @@ export default function Login(props) {
                     <form onSubmit={handleSubmit} >
                         <div className="flex flex-col  ml-8 ">
                             <label className = 'text-lg mb-2 ml-1' htmlFor = 'email'>Email</label>
-                            <input className="rounded-md  border-2 w-72 h-9" value = {email} onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email"></input>
+                            <input className="rounded-md  border-2 w-72 h-9 pl-4 py-1.5 text-md" value = {email} onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email"></input>
                         </div>
                         <div className="flex flex-col  ml-8">
                             <label className = 'text-lg mb-2 mt-2 ml-1' htmlFor = 'password'>Password</label>
-                            <input className="border-2  w-72 rounded-md h-9" value = {pass} onChange={(e) => setPass(e.target.value)}type="password" id="password" name="password"></input>
+                            <input className="border-2  w-72 rounded-md pl-4 py-1.5 text-md" value = {pass} onChange={(e) => setPass(e.target.value)}type="password" id="password" name="password"></input>
                         </div>
                         <button className="border-2  mt-6 ml-8 w-72 p-2 rounded-md bg-pink-500 text-white hover:bg-pink-700" type="submit">LOGIN</button>
                     </form>
