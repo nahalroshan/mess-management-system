@@ -30,19 +30,19 @@ export default function Login(props) {
     };
 
     return (
-        <div className="flex bg-gray-300 h-screen w-full">
-            <div className="flex flex-col shadow-xl w-96 bg-white h-[480px] border-2 border-white shadow mx-auto my-8 space-y-8 rounded-md mt-32">
-                    <div className="text-2xl ml-8 mt-8 "> SIGN UP</div>
+        <div className="flex bg-blue-400 h-screen w-full">
+            <div className="flex flex-col shadow-xl w-96 bg-white h-[480px] border-2 border-white mx-auto my-8 space-y-8 rounded-md mt-32">
+                    <div className="text-2xl ml-8 mt-8 "> LOGIN </div>
                     <form onSubmit={handleSubmit} >
                         <div className="flex flex-col  ml-8 ">
                             <label className = 'text-lg mb-2 ml-1' htmlFor = 'email'>Email</label>
-                            <input className="rounded-md  border-2 w-3/4 h-9 w-10/12" value = {email} onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email"></input>
+                            <input className="rounded-md  border-2 w-72 h-9" value = {email} onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email"></input>
                         </div>
                         <div className="flex flex-col  ml-8">
                             <label className = 'text-lg mb-2 mt-2 ml-1' htmlFor = 'password'>Password</label>
-                            <input className="border-2  w-3/4 rounded-md h-9 w-10/12" value = {pass} onChange={(e) => setPass(e.target.value)}type="password" id="password" name="password"></input>
+                            <input className="border-2  w-72 rounded-md h-9" value = {pass} onChange={(e) => setPass(e.target.value)}type="password" id="password" name="password"></input>
                         </div>
-                        <button className="border-2  mt-6 ml-14 w-64 p-2 rounded-md bg-pink-500 text-white hover:bg-pink-700" type="submit">SIGN UP</button>
+                        <button className="border-2  mt-6 ml-8 w-72 p-2 rounded-md bg-pink-500 text-white hover:bg-pink-700" type="submit">LOGIN</button>
                     </form>
                     <div>
                         <button className="text-center mb-8 text-md ml-12"> Don't have an account? <span className="font-medium underline decoration-solid"><Link to = "/signup">Register here</Link></span></button>           
