@@ -6,6 +6,15 @@ export default {
   ],
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" }
+        }
+      },
+      animation: {
+        wiggle: "wiggle 200ms ease-in-out"
+      },
       colors: {
         "light-gray": "#DCDCDC",
         "dark-gray": 	"#696969",
@@ -13,7 +22,8 @@ export default {
         'pink-icon-bg': '#FFE4F1',
         'dark-dark-gray': '#4A4A4A',
         'purple': 'rgba(148,0,215,1)',
-        'onion': '#CB6094'
+        'onion': '#CB6094',
+        'rose-grad': "linear-gradient(90deg, #EA8D8D 10%, #A890FE 100%)"
       }
     },
   },
