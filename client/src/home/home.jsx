@@ -3,6 +3,7 @@ import Card from "./card"
 import Search from "./search"
 import Table from './table'
 import Stats from "./stats"
+import data from "./data"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase"
@@ -14,7 +15,6 @@ export default function Home() {
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
-    // Listen for changes to the authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         getUsernameFromFirestore(user.email);
@@ -30,7 +30,6 @@ export default function Home() {
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
-        // Assuming there's only one matching document
         const docData = querySnapshot.docs[0].data();
         setUsername(docData.name);
       } else {
@@ -39,6 +38,11 @@ export default function Home() {
     } catch (error) {
       console.error("Error getting username:", error);
     }
+  };
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * data.length);
+    return data[randomIndex].image;
   };
 
   return (
@@ -52,7 +56,7 @@ export default function Home() {
           <div className="flex flex-row space-x-4 items-center">
             <div className="rounded-full w-10 h-10 flex items-center justify-center bg-white"><box-icon name='envelope' color='#CD6496'></box-icon></div>
             <div className="space-x-4 rounded-l-2xl bg-white w-72 h-16 flex flex-row items-center shadow-lg shadow-dark-gray">
-              <div className="ml-4"><img src={user.photoURL} alt="User" /></div>
+              <div className="ml-4"><img className = 'w-12 h-12' src={getRandomImage()} alt="User" /></div>
               <div className="flex flex-col">
                 <div> {username} </div>
                 <div className="text-xs text-dark-gray"> {user.email} </div>

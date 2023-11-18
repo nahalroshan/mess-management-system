@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { getAuth, signOut } from "firebase/auth"
+import { Link, useLocation } from "react-router-dom";
+import Rate from "./rate";
 
 export default function Navbar() {
-  const [selected, setSelected] = useState('dashboard');
+  const [selected, setSelected] = useState();
+  const location = useLocation()
 
   const handleButtonClick = (button) => {
     if (button === "logout") {
@@ -20,7 +23,8 @@ export default function Navbar() {
   }
 
   const getButtonStyle = (button) => {
-    const isSelected = selected === button;
+    const isSelected = selected === button || location.pathname === `/${button}`
+
     return {
       backgroundImage: isSelected
         ? "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(232,9,212,1) 0%, rgba(148,0,215,1) 100%)"
@@ -33,19 +37,20 @@ export default function Navbar() {
   };
 
   return (
+    <div>
     <div className="fixed top-0 left-0 h-screen space-y-4 w-56 m-0 flex text-lg flex-col bg-white text-dark-gray">
-      <button
+    <Link to = "/home"><button
         className={'flex flex-row gap-2 font-semibold  text-dark-gray mt-20'}
-        style={getButtonStyle("dashboard")}
-        onClick={() => handleButtonClick("dashboard")}
+        style={getButtonStyle("home")}
+        onClick={() => handleButtonClick("home")}
       >
         <box-icon
           name="home-alt-2"
-          color={getButtonStyle("dashboard").color || "currentColor"}
+          color={getButtonStyle("home").color || "currentColor"}
           size = '20px'
         ></box-icon>{" "} Dashboard
       </button>
-
+    </Link>
       <button 
         className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
         style={getButtonStyle("attendance")}
@@ -82,16 +87,17 @@ export default function Navbar() {
         onClick={() => handleButtonClick("payment")}> 
           Payment 
       </button> */}
-      <button 
+      <Link to = "/rate"><button 
         className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
-        style={getButtonStyle("feedback")}
-        onClick={() => handleButtonClick("feedback")}> 
+        style={getButtonStyle("rate")}
+        onClick={() => handleButtonClick("rate")}> 
           <box-icon 
             name='star'
-            color={getButtonStyle("feedback").color || "currentColor"}
+            color={getButtonStyle("rate").color || "currentColor"}
             size = '20px'>
           </box-icon>{" "} Feedback 
         </button>
+      </Link>
 
       <button
         className={'flex flex-row gap-2 font-semibold p-2 text-dark-gray'}
@@ -104,6 +110,7 @@ export default function Navbar() {
           size = 'sm'
         ></box-icon>{" "} Logout
       </button>
+    </div>
     </div>
   );
 }
