@@ -1,0 +1,5 @@
+INSERT INTO meal_tracking (id, name)
+SELECT id, name
+FROM users;
+
+

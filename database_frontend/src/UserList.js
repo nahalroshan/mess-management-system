@@ -4,6 +4,7 @@ const UserList = () => {
   const [tables, setTables] = useState([]);
   const [selectedTable, setSelectedTable] = useState('');
   const [tableData, setTableData] = useState([]);
+  const [tableColumns, setTableColumns] = useState([]);
 
   useEffect(() => {
     // Fetch table data when the component mounts
@@ -27,6 +28,11 @@ const UserList = () => {
         try {
           const response = await fetch(`https://mess-server-new.onrender.com/${selectedTable}`);
           const data = await response.json();
+
+          // Extract column names from the first item in the data array
+          const columns = Object.keys(data[0]);
+
+          setTableColumns(columns);
           setTableData(data);
         } catch (error) {
           console.error(`Error fetching data for table ${selectedTable}:`, error);
@@ -56,24 +62,30 @@ const UserList = () => {
 
       {selectedTable && (
         <div>
-        <h2>Data for {selectedTable}</h2>
-        <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((item) => (
-              <tr key={item.id}>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.id}</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.name}</td>
+          <h2>Data for {selectedTable}</h2>
+          <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+            <thead>
+              <tr>
+                {/* Dynamically render table headers based on columns */}
+                {tableColumns.map((column) => (
+                  <th key={column}>{column}</th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {tableData.map((item, index) => (
+                <tr key={index}>
+                  {/* Dynamically render table data based on columns */}
+                  {tableColumns.map((column) => (
+                    <td key={column} style={{ border: '1px solid #ddd', padding: '8px' }}>
+                      {item[column]}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
