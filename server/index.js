@@ -28,16 +28,28 @@ app.get("/user_add/:uid/:name", async (req, res) => {
         const uid = req.params.uid;
         const name = req.params.name;
 
-        // Example query to insert user data
-        const result = await db.query('INSERT INTO public.users(id, name, uid) VALUES (DEFAULT, $1, $2) RETURNING *', [name, uid]);
+        // Example query to check if a user with the given UID already exists
+        const checkQuery = 'SELECT id FROM public.users WHERE uid = $1';
+        const checkResult = await db.query(checkQuery, [uid]);
 
-        // Assuming result.rows contains the inserted user data
-        res.json(result.rows);
+        if (checkResult.rows.length === 0) {
+            // User with the given UID does not exist, proceed with insertion
+            const insertQuery = 'INSERT INTO public.users(id, name, uid) VALUES (DEFAULT, $1, $2) RETURNING *';
+            const insertResult = await db.query(insertQuery, [name, uid]);
+
+            // Assuming insertResult.rows contains the inserted user data
+            res.json(insertResult.rows);
+        } else {
+            // User with the given UID already exists
+            res.status(409).json({ message: `User with UID ${uid} already exists` });
+        }
     } catch (error) {
-        console.error("Error inserting user data:", error);
+        console.error("Error adding user:", error);
         res.status(500).send("Internal Server Error");
     }
 });
+
+
 app.get("/get_user_id_by_uid/:uid", async (req, res) => {
     try {
         // Extract parameter from the request
