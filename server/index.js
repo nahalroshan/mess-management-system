@@ -22,6 +22,42 @@ app.get("/table", async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+app.get("/user_add/:uid/:name", async (req, res) => {
+    try {
+        // Extract parameters from the request
+        const uid = req.params.uid;
+        const name = req.params.name;
+
+        // Example query to insert user data
+        const result = await db.query('INSERT INTO public.users(id, name, uid) VALUES (DEFAULT, $1, $2) RETURNING *', [name, uid]);
+
+        // Assuming result.rows contains the inserted user data
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error inserting user data:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+app.get("/get_user_id_by_uid/:uid", async (req, res) => {
+    try {
+        // Extract parameter from the request
+        const uid = req.params.uid;
+
+        // Example query to retrieve user ID by UID
+        const result = await db.query('SELECT id FROM public.users WHERE uid = $1', [uid]);
+
+        // Assuming result.rows contains the user ID
+        if (result.rows.length > 0) {
+            res.json({ id: result.rows[0].id });
+        } else {
+            res.status(404).json({ message: "User not found" });
+        }
+    } catch (error) {
+        console.error("Error fetching user ID:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 // Endpoint to get user data
 app.get("/:ask", async (req, res) => {
     var data_ask = req.params.ask;
