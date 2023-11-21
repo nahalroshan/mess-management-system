@@ -7,6 +7,7 @@ import Register from './register'
 import app from './firebase'
 import Home from './home/home';
 import Rate from './home/rate';
+import Navbar from './home/navbar';
 
 function App() {
   
@@ -25,7 +26,12 @@ function App() {
               />
           <Route path = '/' element = {<Login />} />
           <Route path = '/signup' element = {<Register />} />
-          <Route path="/rate" element={<Rate />} />
+          <Route path="/rate" element={
+            <div>
+              <Rate />
+              <Navbar />
+            </div>
+          } />
         </Routes>
         </UserAuthContextProvider>
         </Router>
