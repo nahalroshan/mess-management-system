@@ -25,6 +25,8 @@ const rateSubmit = (e) => {
 const clear = (e) => {
     e.preventDefault()
     setComment("")
+    setEmoji()
+    setStartDate()
 }
 
 const changeRate = (e,r) => {
@@ -39,7 +41,7 @@ const addComment = (e) => {
 }
 
   return (
-    <div className="flex h-screen w-screen bg-gray-100 justify-center items-center">
+    <div className="flex h-screen w-screen bg-gray-200 justify-center items-center">
       <form className="flex flex-col h-3/4 w-1/3  bg-white rounded-2xl" onSubmit={rateSubmit}>
         <div className="ml-10 space-y-4">
           <div className="font-medium text-lg mt-10">Give Feedback</div>
