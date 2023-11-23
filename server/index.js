@@ -11,7 +11,6 @@ app.use(express.json());
 // Use cors middleware
 app.use(cors());
 app.get("/menu", async (req, res) => {
-    var data_ask = req.params.ask;
     try {
         // Example query to retrieve user data
         const result = await db.query(`SELECT * FROM menu`);
@@ -21,6 +20,23 @@ app.get("/menu", async (req, res) => {
     } catch (error) {
         console.error("Error fetching user data:", error);
         res.status(500).send("Internal Server Error");
+    }
+});
+app.get("/feedback/:stars/:feedbacktext/:id/:name", async (req, res) => {
+    const stars = req.params.stars;
+    const feedbackText = req.params.feedbacktext;
+    const id = req.params.id;
+    const name = req.params.name;
+
+    try {
+        // Example query to handle feedback data
+        const result = await db.query('INSERT INTO feedback (rating, feedback,id,name) VALUES ($1, $2, $3, $4) RETURNING *', [stars, feedbackText, id, name]);
+
+        // Assuming result.rows contains the inserted feedback data
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error handling feedback:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 });
 
