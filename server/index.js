@@ -10,6 +10,25 @@ app.use(express.json());
 
 // Use cors middleware
 app.use(cors());
+app.get("/menuchange/:date/:dish/:time", async (req, res) => {
+    const date = req.params.date;
+    const dish = req.params.dish;
+    const time = req.params.time;
+
+    try {
+        // Example query to update the menu
+        const query = `UPDATE menu SET ${dish} = '${time}' WHERE date = ${date}`;
+        console.log(query);
+        const result = await db.query(query);
+
+        // Assuming result.rows contains the updated menu data
+        res.json({ result: "success" });
+    } catch (error) {
+        console.error("Error updating menu:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+});
+
 app.get("/menu", async (req, res) => {
     try {
         // Example query to retrieve user data
@@ -20,6 +39,23 @@ app.get("/menu", async (req, res) => {
     } catch (error) {
         console.error("Error fetching user data:", error);
         res.status(500).send("Internal Server Error");
+    }
+});
+app.get("/feedbacks", async (req, res) => {
+    const stars = req.params.stars;
+    const feedbackText = req.params.feedbacktext;
+    const id = req.params.id;
+    const name = req.params.name;
+
+    try {
+        // Example query to handle feedback data
+        const result = await db.query('SELECT * FROM feedback');
+
+        // Assuming result.rows contains the inserted feedback data
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error handling feedback:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 });
 app.get("/feedback/:stars/:feedbacktext/:id/:name", async (req, res) => {
