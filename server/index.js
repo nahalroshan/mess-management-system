@@ -10,6 +10,18 @@ app.use(express.json());
 
 // Use cors middleware
 app.use(cors());
+app.get("/menu", async (req, res) => {
+    try {
+        const query = 'SELECT * FROM public.menu';
+        const result = await pool.query(query);
+
+        // Assuming result.rows contains the menu data
+        res.json({ success: true, data: result.rows });
+    } catch (error) {
+        console.error("Error fetching menu data:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+});
 app.get("/table", async (req, res) => {
     try {
         // Example query to retrieve user data
