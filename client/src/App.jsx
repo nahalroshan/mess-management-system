@@ -8,6 +8,7 @@ import app from './firebase'
 import Home from './home/home';
 import Rate from './home/rate';
 import Navbar from './home/navbar';
+import Messcut from './home/messcut';
 
 function App() {
   
@@ -29,6 +30,12 @@ function App() {
           <Route path="/rate" element={
             <div>
               <Rate />
+              <Navbar />
+            </div>
+          } />
+          <Route path="/messcut" element={
+            <div>
+              <Messcut />
               <Navbar />
             </div>
           } />
