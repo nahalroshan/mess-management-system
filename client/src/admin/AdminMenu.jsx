@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import AdminNav from "./AdminNav";
 
@@ -23,6 +22,25 @@ function Menu() {
     setSelectedDay(day);
   };
 
+  const handleMenuChange = (date, dish, time) => {
+    // Fetch to update menu
+    fetch(`https://mess-lysy.onrender.com/menuchange/${date}/${dish}/${time}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // You may need to send additional data in the body depending on your API
+      // body: JSON.stringify({}),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        // Update local state or refetch menu data if needed
+      })
+      .catch((error) => console.error("Error updating menu:", error));
+  };
+
   return (
     <div className="flex flex-row">
       <AdminNav />
@@ -45,7 +63,6 @@ function Menu() {
             <>
               {menuData.map((menu) => (
                 menu.date === selectedDay && (
-                  
                   <div
                     key={menu.date}
                     className="max-w-sm bg-white border h-96 w-72 border-gray-200 rounded-lg shadow dark:bg-sky-100 dark:border-gray-700 m-4"
@@ -57,31 +74,25 @@ function Menu() {
                       <br />
                       <h5 className="mb-2 m-2 text-2xl font-bold tracking-tight text-gray-900">
                         Breakfast: {menu.breakfast}
+                        <div className="flex flex-row">
+                          <input type="text" className="ml-2" placeholder="" />
+                          <button className="ml-2"  onClick={() => handleMenuChange(1, "mathy", "breakfast")}>submit</button>
+                        </div>
                       </h5>
-                      <div className="flex flex-row">
-                      <input type="text" className="ml-2" placeholder="" />
-                      <button className="ml-2" onClick={() => console.log("Jaseem")}>submit</button>
-
-                      </div>
-                     
                       <p className="mb-2 m-2 text-2xl font-bold tracking-tight text-gray-900">
                         Lunch: {menu.lunch}
+                        <div className="flex flex-row">
+                          <input type="text" className="ml-2" placeholder=" " />
+                          <button className="ml-2" onClick={() => handleMenuChange(selectedDay, "lunch", "lunch")}>submit</button>
+                        </div>
                       </p>
-                      <div className="flex flex-row">
-                      <input type="text" className="ml-2" placeholder=" " />
-                      <button className="ml-2" onClick={() => console.log("Jaseem")}>submit</button>
-
-                      </div>
-                     
                       <p className="mb-2 m-2 text-2xl font-bold tracking-tight text-gray-900">
                         Dinner: {menu.dinner}
+                        <div className="flex flex-row">
+                          <input type="text" className="ml-2" placeholder=" " />
+                          <button className="ml-2" onClick={() => handleMenuChange(selectedDay, "dinner", "dinner")}>submit</button>
+                        </div>
                       </p>
-                      <div className="flex flex-row">
-                      <input type="text" className="ml-2" placeholder=" " />
-                      <button className="ml-2" onClick={() => console.log("Jaseem")}>submit</button>
-
-                      </div>
-                     
                     </div>
                   </div>
                 )
