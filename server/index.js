@@ -17,7 +17,7 @@ app.get("/menuchange/:date/:dish/:time", async (req, res) => {
 
     try {
         // Example query to update the menu
-        const query = `UPDATE menu SET ${dish} = '${time}' WHERE date = ${date}`;
+        const query = `UPDATE menu SET ${time} = '${dish}' WHERE date = ${date}`;
         console.log(query);
         const result = await db.query(query);
 
