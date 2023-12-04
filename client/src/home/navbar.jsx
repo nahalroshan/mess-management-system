@@ -61,7 +61,7 @@ export default function Navbar() {
             size = '20px'>
           </box-icon>{" "} Attendance 
       </button>
-      <button 
+      <Link to = "/messcut"><button 
         className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
         style={getButtonStyle("messcut")}
         onClick={() => handleButtonClick("messcut")}> 
@@ -70,7 +70,7 @@ export default function Navbar() {
             color={getButtonStyle("messcut").color || "currentColor"}
             size = '20px'>
           </box-icon>{" "} Mess Cut 
-      </button>
+      </button></Link>
       <button 
         className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
         style={getButtonStyle("menu")}
