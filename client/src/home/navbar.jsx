@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { getAuth, signOut } from "firebase/auth"
+import { getAuth, signOut } from "firebase/auth";
 import { Link, useLocation } from "react-router-dom";
 import Rate from "./rate";
 
 export default function Navbar() {
   const [selected, setSelected] = useState();
-  const location = useLocation()
+  const location = useLocation();
 
   const handleButtonClick = (button) => {
     if (button === "logout") {
@@ -20,10 +20,11 @@ export default function Navbar() {
     } else {
       setSelected(button);
     }
-  }
+  };
 
   const getButtonStyle = (button) => {
-    const isSelected = selected === button || location.pathname === `/${button}`
+    const isSelected =
+      selected === button || location.pathname === `/${button}`;
 
     return {
       backgroundImage: isSelected
@@ -38,79 +39,99 @@ export default function Navbar() {
 
   return (
     <div>
-    <div className="fixed top-0 left-0 h-screen space-y-4 w-56 m-0 flex text-lg flex-col bg-white text-dark-gray">
-    <Link to = "/home"><button
-        className={'flex flex-row gap-2 font-semibold  text-dark-gray mt-20'}
-        style={getButtonStyle("home")}
-        onClick={() => handleButtonClick("home")}
-      >
-        <box-icon
-          name="home-alt-2"
-          color={getButtonStyle("home").color || "currentColor"}
-          size = '20px'
-        ></box-icon>{" "} Dashboard
-      </button>
-    </Link>
-      <button 
-        className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
-        style={getButtonStyle("attendance")}
-        onClick={() => handleButtonClick("attendance")}> 
-          <box-icon 
-            name='calendar-check'
+      <div className="fixed top-0 left-0 h-screen space-y-4 w-56 m-0 flex text-lg flex-col bg-white text-dark-gray">
+        <Link to="/home">
+          <button
+            className={
+              "flex flex-row gap-2 font-semibold  text-dark-gray mt-20"
+            }
+            style={getButtonStyle("home")}
+            onClick={() => handleButtonClick("home")}
+          >
+            <box-icon
+              name="home-alt-2"
+              color={getButtonStyle("home").color || "currentColor"}
+              size="20px"
+            ></box-icon>{" "}
+            Dashboard
+          </button>
+        </Link>
+        <Link to='/attendance'>
+        <button
+          className={"flex flex-row gap-2 font-semibold  text-dark-gray"}
+          style={getButtonStyle("attendance")}
+          onClick={() => handleButtonClick("attendance")}
+        >
+          <box-icon
+            name="calendar-check"
             color={getButtonStyle("attendance").color || "currentColor"}
-            size = '20px'>
-          </box-icon>{" "} Attendance 
-      </button>
-      <button 
-        className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
-        style={getButtonStyle("messcut")}
-        onClick={() => handleButtonClick("messcut")}> 
-          <box-icon 
-            name='task-x'
+            size="20px"
+          ></box-icon>{" "}
+          Attendance
+        </button>
+        </Link>
+      
+        <button
+          className={"flex flex-row gap-2 font-semibold  text-dark-gray"}
+          style={getButtonStyle("messcut")}
+          onClick={() => handleButtonClick("messcut")}
+        >
+          <box-icon
+            name="task-x"
             color={getButtonStyle("messcut").color || "currentColor"}
-            size = '20px'>
-          </box-icon>{" "} Mess Cut 
-      </button>
-      <button 
-        className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
-        style={getButtonStyle("menu")}
-        onClick={() => handleButtonClick("menu")}> 
-          <box-icon 
-            name='food-menu'
-            color={getButtonStyle("menu").color || "currentColor"}
-            size = '20px'>
-          </box-icon>{" "} Menu 
-      </button>
-      {/* <button 
+            size="20px"
+          ></box-icon>{" "}
+          Mess Cut
+        </button>
+        <Link to='/menu'>
+          <button
+            className={"flex flex-row gap-2 font-semibold  text-dark-gray"}
+            style={getButtonStyle("menu")}
+            onClick={() => handleButtonClick("menu")}
+          >
+            <box-icon
+              name="food-menu"
+              color={getButtonStyle("menu").color || "currentColor"}
+              size="20px"
+            ></box-icon>{" "}
+            Menu
+          </button>
+        </Link>
+
+        {/* <button 
         className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
         style={getButtonStyle("payment")}
         onClick={() => handleButtonClick("payment")}> 
           Payment 
       </button> */}
-      <Link to = "/rate"><button 
-        className={'flex flex-row gap-2 font-semibold  text-dark-gray'}
-        style={getButtonStyle("rate")}
-        onClick={() => handleButtonClick("rate")}> 
-          <box-icon 
-            name='star'
-            color={getButtonStyle("rate").color || "currentColor"}
-            size = '20px'>
-          </box-icon>{" "} Feedback 
-        </button>
-      </Link>
+        <Link to="/rate">
+          <button
+            className={"flex flex-row gap-2 font-semibold  text-dark-gray"}
+            style={getButtonStyle("rate")}
+            onClick={() => handleButtonClick("rate")}
+          >
+            <box-icon
+              name="star"
+              color={getButtonStyle("rate").color || "currentColor"}
+              size="20px"
+            ></box-icon>{" "}
+            Feedback
+          </button>
+        </Link>
 
-      <button
-        className={'flex flex-row gap-2 font-semibold p-2 text-dark-gray'}
-        style={getButtonStyle("logout")}
-        onClick={() => handleButtonClick("logout")}
-      >
-        <box-icon
-          name="log-out"
-          color={getButtonStyle("logout").color || "currentColor"}
-          size = 'sm'
-        ></box-icon>{" "} Logout
-      </button>
-    </div>
+        <button
+          className={"flex flex-row gap-2 font-semibold p-2 text-dark-gray"}
+          style={getButtonStyle("logout")}
+          onClick={() => handleButtonClick("logout")}
+        >
+          <box-icon
+            name="log-out"
+            color={getButtonStyle("logout").color || "currentColor"}
+            size="sm"
+          ></box-icon>{" "}
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

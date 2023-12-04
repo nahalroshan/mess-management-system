@@ -30,8 +30,8 @@ export default function Login(props) {
     };
 
     return (
-        <div className="flex bg-blue-400 h-screen w-full">
-            <div className="flex flex-col shadow-xl w-96 bg-white h-[480px] border-2 border-white mx-auto my-8 space-y-8 rounded-md mt-32">
+        <div className="flex bg-sky-100 h-screen w-full">
+            <div className="flex flex-col shadow-xl w-96 bg-white h-[480px] border-2 border-white mx-auto my-8 space-y-8 rounded-md mt-16">
                     <div className="text-2xl ml-8 mt-8 "> LOGIN </div>
                     <form onSubmit={handleSubmit} >
                         <div className="flex flex-col  ml-8 ">
